@@ -3222,7 +3222,7 @@ class NimbusFeatureConfigTests(TestCase):
                 NimbusVersionedSchema(
                     feature_config=feature,
                     version=versions[(major, minor, patch)],
-                    sets_prefs=[],
+                    set_pref_vars={},
                 )
                 for major in range(1, 3)
                 for minor in range(3)

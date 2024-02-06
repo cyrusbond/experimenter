@@ -2706,7 +2706,9 @@ class TestNimbusReviewSerializerSingleFeature(MockFmlErrorMixin, TestCase):
                         NimbusVersionedSchemaFactory.build(
                             version=None,
                             schema=None,
-                            sets_prefs=["foo.bar.baz"],
+                            set_pref_vars={
+                                "baz": "foo.bar.baz",
+                            },
                         ),
                     ],
                 ),

@@ -300,7 +300,7 @@ class NimbusConfigurationDataClass:
                 application=NimbusExperiment.Application(f.application).name,
                 ownerEmail=f.owner_email,
                 schema=f.schemas.get().schema,
-                setsPrefs=bool(f.schemas.get().sets_prefs),
+                setsPrefs=bool(f.schemas.get().set_pref_vars),
                 enabled=f.enabled,
             )
             for f in NimbusFeatureConfig.objects.all()
@@ -2114,7 +2114,7 @@ class NimbusReviewSerializer(serializers.ModelSerializer):
     def _validate_desktop_pref_rollouts(self, data):
         if self.instance.is_rollout:
             any_feature_sets_prefs = any(
-                schema.sets_prefs
+                bool(schema.set_pref_vars)
                 for schemas_in_range in self.schemas_by_feature_id.values()
                 for schema in schemas_in_range.schemas
             )

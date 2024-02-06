@@ -25,7 +25,7 @@ class TestNimbusConfigurationSerializer(MockSizingDataMixin, TestCase):
                 schemas=[
                     NimbusVersionedSchemaFactory.build(
                         version=None,
-                        sets_prefs=["foo.bar.baz"],
+                        set_pref_vars={"baz": "foo.bar.baz"},
                     )
                 ],
             ),
@@ -35,7 +35,10 @@ class TestNimbusConfigurationSerializer(MockSizingDataMixin, TestCase):
                 schemas=[
                     NimbusVersionedSchemaFactory.build(
                         version=None,
-                        sets_prefs=["qux.quux.corge", "grault.garply.waldo"],
+                        set_pref_vars={
+                            "corge": "qux.quux.corge",
+                            "waldo": "grault.garply.waldo",
+                        },
                     )
                 ]
             )
@@ -114,7 +117,7 @@ class TestNimbusConfigurationSerializer(MockSizingDataMixin, TestCase):
                     "ownerEmail": feature_config.owner_email,
                     "schema": feature_config.schemas.get(version=None).schema,
                     "setsPrefs": bool(
-                        feature_config.schemas.get(version=None).sets_prefs
+                        feature_config.schemas.get(version=None).set_pref_vars
                     ),
                     "enabled": bool(feature_config.enabled),
                 },
